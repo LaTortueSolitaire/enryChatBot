@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    h1= title
+    p Players
+    ul
+        each player in Players
+            if player.first_name
+                li= player.first_name + " " + player.last_name
+            else
+                li= player.phonenr
+    ul
+        each match in Matches
+            if match.player2_alias
+                li= match.player1_id + " vs " + match.player2_alias + " Result: " + match.player1_score + " - " + match.player2_score
+            else
+                 li= match.player1_id + " vs " + match.player2_phone + " Result: " + match.player1_score + " - " + match.player2_score

@@ -4,6 +4,7 @@
   "description": "",
   "main": "chat.js",
   "scripts": {
+    "start": "node ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,19 @@
   "bugs": {
     "url": "https://github.com/LaTortueSolitaire/enryChatBot/issues"
   },
-  "homepage": "https://github.com/LaTortueSolitaire/enryChatBot#readme"
+  "homepage": "https://github.com/LaTortueSolitaire/enryChatBot#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bootbot": "^1.0.16",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "fb-bot-framework": "^0.3.0",
+    "http-errors": "~1.6.2",
+    "mongodb": "3.1.13",
+    "mongoose": "^5.2.15",
+    "morgan": "~1.9.0",
+    "pug": "^2.0.3",
+    "request": "latest"
+  }
 }
