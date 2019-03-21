@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var Player = require('../models/player');
-var Match = require('../models/match');
+// var Player = require('../models/player');
+// var Match = require('../models/match');
 
 
 /* GET users listing. */
