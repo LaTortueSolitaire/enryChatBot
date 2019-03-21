@@ -7,13 +7,12 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var axios = require('axios');
-var config = require('./config');
 
 const BootBot = require('bootbot');
-const registerscorephone = require('./modules/register_score_phone');
-const registerscorealias = require('./modules/register_score_alias');
+// const registerscorephone = require('./modules/register_score_phone');
+// const registerscorealias = require('./modules/register_score_alias');
 
-var settings = require('../config/settings.js');
+var settings = require('./config/settings.js');
 var facebook = settings.facebook;
 
 var app = express();
@@ -67,7 +66,7 @@ bot.setGreetingText("Welcome on our chat, you can send the command !register <us
 
 bot.hear(['hello', 'hi', /hey( there)?/i], (payload, chat) => {
     chat.getUserProfile().then((user) => {
-        chat.say(`Hello, ${user.first_name}!`);
+        chat.say(`Hello !`);
     });
 });
 
