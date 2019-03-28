@@ -16,7 +16,7 @@ var url = 'mongodb://'+db.host+':'+db.port;
 var dbName = db.name;
 
 // Connection to the server
-function getUser(cardId, callback){
+function registerUsername(userName, pinCode, callback){
     MongoClient.connect(url, function(err, client){
         console.log("connectDatabase");
         //assert.equal(null, err);
@@ -24,15 +24,17 @@ function getUser(cardId, callback){
 
         var  db = client.db(dbName);
 
-        db.collection("players").findOne({
-            $or: [
-                {RFID:cardId},
-                {NFC:cardId}
-            ]
+        db.collection("players").updateOne({
+            pin_code: pinCode
         },
+		{
+			$set : {
+				username: userName
+			}
+		},
         function(err,result){
             if (err) throw err;
-            callback(result);
+            callback(result.result.nModified);
         });
         client.close();
     });
