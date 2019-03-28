@@ -1,6 +1,6 @@
 var settings = {
     www: {
-        port: 3000
+        port: 3002
     },
     db: {
         host: 'localhost',

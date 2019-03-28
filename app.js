@@ -77,18 +77,31 @@ bot.hear(['hello', 'hi', /hey( there)?/i], (payload, chat) => {
 //    });
 //});
 
-bot.hear('!register', (payload, chat) => {
+bot.setPersistentMenu([
+	{
+		"locale":"default",
+		"composer_input_disabled":false,
+		"call_to_actions":[
+			{
+				"title":"Help",
+				"type":"postback",
+				"payload":"GET_HELP"
+			}
+		]
+	}
+]);
+
+bot.hear('/!register \w+ \d{4}/g', (payload, chat) => {
 	chat.getUserProfile().then((user) =>{
 		var text = payload.message.text;
 		var mess = text.split(' ');
-		if(mess.length != 3){
-			chat.say(`The command !register should be use like this : !register <username> <pin code>.`);
-		}
-		else{
-			chat.say('Right command just have to implement it now');
-		}
+		chat.say('Right command just have to implement it now');
 	})
 });
+
+bot.on('postback:GET_HELP', (payload, chat) => {
+	chat.say("Welcome on our chat, you can send the command !register <username> <pin code> to link your account with your card.  Afterwards you can use the command !stats to have your games statistics.");
+})
 
 // bot.module(registerscorephone);
 // bot.module(registerscorealias);
