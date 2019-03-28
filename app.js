@@ -91,7 +91,7 @@ bot.setPersistentMenu([
 	}
 ]);
 
-bot.hear('/!register \w+ \d{4}/g', (payload, chat) => {
+bot.hear(/!register \w+ \d{4}/g, (payload, chat) => {
 	chat.getUserProfile().then((user) =>{
 		var text = payload.message.text;
 		var mess = text.split(' ');
