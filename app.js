@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var db = require('../db/db.js');
 
 var axios = require('axios');
 
@@ -95,7 +96,7 @@ bot.hear(/!register \w+ \d{4}/g, (payload, chat) => {
 	chat.getUserProfile().then((user) =>{
 		var text = payload.message.text;
 		var mess = text.split(' ');
-		chat.say('Right command just have to implement it now');
+		chat.say('Right command just have to implement it now'+mess[0]+" "+mess[1]+" "+mess[2]);
 	})
 });
 
@@ -107,7 +108,7 @@ bot.on('postback:GET_HELP', (payload, chat) => {
 // bot.module(registerscorealias);
 //
 function getStarted(userId) {
-    bot.say("Welcome on our chat, you can send the command !register <username> <pin code> to link your account with your card.  Afterwards you can use the command !stats to have your games statistics.");
+    bot.say(userId, "Welcome on our chat, you can send the command !register <username> <pin code> to link your account with your card.  Afterwards you can use the command !stats to have your games statistics.");
     // bot.say("Hi! I'm Enry, a facebook bot for table tennis. Please pick an Option", replies);
 }
 
