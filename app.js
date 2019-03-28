@@ -38,8 +38,8 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/facebookChat', indexRouter);
+app.use('/facebookChat/users', usersRouter);
 app.use(function (req, res, next) {
     next(createError(404));
 });
@@ -70,12 +70,12 @@ bot.hear(['hello', 'hi', /hey( there)?/i], (payload, chat) => {
     });
 });
 
-bot.on('message', (payload, chat) => {
-    chat.getUserProfile().then((user) => {
-        chat.say(`Hello, ${user.first_name}!`);
-        chat.say(`I'm merely a simply bot, and did not understand what you just told me! Try:!`);
-    });
-});
+//bot.on('message', (payload, chat) => {
+//    chat.getUserProfile().then((user) => {
+//        chat.say(`Hello, ${user.first_name}!`);
+//        chat.say(`I'm merely a simply bot, and did not understand what you just told me! Try:!`);
+//    });
+//});
 
 bot.hear('!register', (payload, chat) => {
 	chat.getUserProfile().then((user) =>{
