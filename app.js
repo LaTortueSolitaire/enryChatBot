@@ -107,7 +107,17 @@ bot.on('postback:GET_HELP', (payload, chat) => {
 // bot.module(registerscorealias);
 //
 function getStarted(userId) {
-    bot.say("Welcome on our chat, you can send the command !register <username> <pin code> to link your account with your card.  Afterwards you can use the command !stats to have your games statistics.");
+    var replies = [
+        {
+            "type": "postback",
+            "title": "Help",
+            "payload": "GET_HELP"
+        }
+    ];
+    bot.say(userId.sender, [{
+        text: "Hi! I'm Enry, a facebook bot for table tennis. Please pick an Option",
+        buttons: replies
+    }]);
     // bot.say("Hi! I'm Enry, a facebook bot for table tennis. Please pick an Option", replies);
 }
 
