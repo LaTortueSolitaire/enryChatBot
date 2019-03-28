@@ -41,5 +41,5 @@ function registerUsername(userName, pinCode, callback){
 };
 
 module.exports =  {
-
+	registerUsername
 };
