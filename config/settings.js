@@ -8,7 +8,7 @@ var settings = {
         name: 'enryChat'
     },
     facebook: {
-        fb_page_token: "EAAlLCCfoZBWYBAAcKitujEHlZCo2HExkfoD4B4h3B6RR7tmGkFCBZA9fIk9ParPWZByUGFP8ZBsIWOfo7ftVXZCCVgG4ZCd52O2y7fvWg9JrM22ZC4ImDwHgnhA7r4FAFejQMadZCSiyNy17dd5AEFUcLFHsRhG2gwP6Jd0C6RZA9CQwZDZD",
+        fb_page_token: "EAAlLCCfoZBWYBAN8ZAsNc5eEQeEBqZBiT737MrgvMTar0vns6obmigHP95N3NpNIBPHz363N4zHLFMtFIifZC5wNHUM3ITg9lxXIvh7kGCKBrtRBpVUfv9EZA61hZBAY8UMGUZA0XiCbvpg6NP3t9jC1XlWgIzZBAeWkuZCZC31WtWzgZDZD",
         fb_verify_token: "verificationChatBot",
         fb_app_secret: "6721e5ce71bb7b189f97f0f711668899"
     }
