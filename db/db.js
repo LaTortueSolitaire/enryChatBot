@@ -29,8 +29,8 @@ function registerUsername(userName, pinCode, userId, callback){
         },
 		{
 			$set : {
-				username: userName
-				userFacebookId : userId;
+				username: userName,
+				userFacebookId : userId
 			}
 		},
         function(err,result){
@@ -50,7 +50,7 @@ function getStats(userId, callback){
         var  db = client.db(dbName);
 
         db.collection("players").findOne({
-            userFacebookId : userId
+            userFacebookId: userId
         },
 		{
 				projection : {
