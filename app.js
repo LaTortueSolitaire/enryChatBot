@@ -95,14 +95,32 @@ bot.setPersistentMenu([
 bot.hear(/!register \w+ \d{4}/g, (payload, chat) => {
 	chat.getUserProfile().then((user) =>{
 		var text = payload.message.text;
+		var userId = payload.sender.id;
 		var mess = text.split(' ');
-		chat.say('Right command just have to implement it now :   '+mess[0]+" "+mess[1]+" "+mess[2]);
-		db.registerUsername(mess[1], mess[2], function(res){
-			if(res ==1) {
+		db.registerUsername(mess[1], mess[2], userId, function(res){
+			if(res == 1) {
 				chat.say('You have been register correctly');
 			}
 			else {
 				chat.say('There was no player with this pin code');
+			}
+		});
+	})
+});
+
+bot.hear(/!stats/g, (payload, chat) => {
+	chat.getUserProfile().then((user) => {
+		var text = payload.message.text;
+		var userId = payload.sender.id;
+		db.getStats(userId, function(res){
+			if(!res){
+				chat.say('Be sure you are register before asking for your statistics !');
+			}
+			else {
+				var nbGames = res.games;
+				var nbWins = res.wins;
+				var percents = (nbWins/nbGames)*100;
+				chat.say("Your statistics are : \n - "+nbWins.toString()+" wins over "+nbGames.toString()+" games. \n - "+percents.toString()+" % of wins.");
 			}
 		});
 	})

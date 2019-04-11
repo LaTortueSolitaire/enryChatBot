@@ -16,7 +16,7 @@ var url = 'mongodb://'+db.host+':'+db.port;
 var dbName = db.name;
 
 // Connection to the server
-function registerUsername(userName, pinCode, callback){
+function registerUsername(userName, pinCode, userId, callback){
     MongoClient.connect(url, function(err, client){
         console.log("connectDatabase");
         //assert.equal(null, err);
@@ -30,6 +30,7 @@ function registerUsername(userName, pinCode, callback){
 		{
 			$set : {
 				username: userName
+				userFacebookId : userId;
 			}
 		},
         function(err,result){
@@ -40,6 +41,33 @@ function registerUsername(userName, pinCode, callback){
     });
 };
 
+function getStats(userId, callback){
+    MongoClient.connect(url, function(err, client){
+        console.log("connectDatabase");
+        //assert.equal(null, err);
+        console.log("Connected successfully to server");
+
+        var  db = client.db(dbName);
+
+        db.collection("players").findOne({
+            userFacebookId : userId
+        },
+		{
+				projection : {
+					_id : 0,
+					games : 1,
+					wins : 1
+				}
+		},
+        function(err,result){
+            if (err) throw err;
+            callback(result);
+        });
+        client.close();
+    });
+};
+
 module.exports =  {
-	registerUsername
+	registerUsername,
+	getStats
 };
