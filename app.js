@@ -89,10 +89,21 @@ bot.setPersistentMenu([
 				"payload":"GET_HELP"
 			}
 		]
+	},
+	{
+		"locale":"default",
+		"composer_input_disabled":false,
+		"call_to_actions":[
+			{
+				"title":"Stats",
+				"type":"postback",
+				"payload":"GET_STATS"
+			}
+		]
 	}
 ]);
 
-bot.hear(/!register \w+ \d{4}/g, (payload, chat) => {
+bot.hear(/register \w+ \d{4}/gi, (payload, chat) => {
 	chat.getUserProfile().then((user) =>{
 		var text = payload.message.text;
 		var userId = payload.sender.id;
@@ -108,7 +119,7 @@ bot.hear(/!register \w+ \d{4}/g, (payload, chat) => {
 	})
 });
 
-bot.hear(/!stats/g, (payload, chat) => {
+bot.hear(/stats/gi, (payload, chat) => {
 	chat.getUserProfile().then((user) => {
 		var text = payload.message.text;
 		var userId = payload.sender.id;
@@ -127,14 +138,32 @@ bot.hear(/!stats/g, (payload, chat) => {
 });
 
 bot.on('postback:GET_HELP', (payload, chat) => {
-	chat.say("Welcome on our chat, you can send the command !register <username> <pin code> to link your account with your card.  Afterwards you can use the command !stats to have your games statistics.");
+	chat.say("Welcome on our chat, you can send the command "register <username> <pin code>" to link your account with your card.  Afterwards you can use the command "stats" to have your games statistics.");
+})
+
+bot.on('postback:GET_STATS', (payload, chat) => {
+	chat.getUserProfile().then((user) => {
+		var text = payload.message.text;
+		var userId = payload.sender.id;
+		db.getStats(userId, function(res){
+			if(!res){
+				chat.say('Be sure you are register before asking for your statistics !');
+			}
+			else {
+				var nbGames = res.games;
+				var nbWins = res.wins;
+				var percents = (nbWins/nbGames)*100;
+				chat.say("Your statistics are : \n - "+nbWins.toString()+" wins over "+nbGames.toString()+" games. \n - "+percents.toString()+" % of wins.");
+			}
+		});
+	})
 })
 
 // bot.module(registerscorephone);
 // bot.module(registerscorealias);
 //
 function getStarted(userId) {
-    bot.say(userId, "Welcome on our chat, you can send the command !register <username> <pin code> to link your account with your card.  Afterwards you can use the command !stats to have your games statistics.");
+    bot.say(userId, "Welcome on our chat, you can send the command "register <username> <pin code>" to link your account with your card.");
     // bot.say("Hi! I'm Enry, a facebook bot for table tennis. Please pick an Option", replies);
 }
 
