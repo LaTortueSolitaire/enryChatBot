@@ -87,13 +87,7 @@ bot.setPersistentMenu([
 				"title":"Help",
 				"type":"postback",
 				"payload":"GET_HELP"
-			}
-		]
-	},
-	{
-		"locale":"default",
-		"composer_input_disabled":false,
-		"call_to_actions":[
+			},
 			{
 				"title":"Stats",
 				"type":"postback",
