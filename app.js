@@ -97,7 +97,7 @@ bot.hear(/!register \w+ \d{4}/g, (payload, chat) => {
 		var text = payload.message.text;
 		var userId = payload.sender.id;
 		var mess = text.split(' ');
-		db.registerUsername(mess[1], mess[2], userId, function(res){
+		db.registerUsername(mess[1], parseInt(mess[2]), userId, function(res){
 			if(res == 1) {
 				chat.say('You have been register correctly');
 			}
