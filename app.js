@@ -130,7 +130,7 @@ bot.hear(/stats/gi, (payload, chat) => {
 			else {
 				var nbGames = res.games;
 				var nbWins = res.wins;
-				var percents = (nbWins/nbGames)*100;
+				var percents = Math.round((nbWins/nbGames)*100);
 				chat.say("Your statistics are : \n - "+nbWins.toString()+" wins over "+nbGames.toString()+" games. \n - "+percents.toString()+" % of wins.");
 			}
 		});
