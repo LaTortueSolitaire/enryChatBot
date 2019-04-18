@@ -62,7 +62,7 @@ app.use(function (err, req, res, next) {
 
 bot.setGetStartedButton(getStarted);
 
-bot.setGreetingText("Welcome on our chat, you can send the command !register <username> <pin code> to link your account with your card.  Afterwards you can use the command !stats to have your games statistics.");
+bot.setGreetingText("Welcome on our chat, you can send the command \"register <username> <pin code>\" to link your account with your card.  Afterwards you can use the command \"stats\" to have your games statistics.");
 
 
 bot.hear(['hello', 'hi', /hey( there)?/i], (payload, chat) => {
@@ -138,7 +138,7 @@ bot.hear(/stats/gi, (payload, chat) => {
 });
 
 bot.on('postback:GET_HELP', (payload, chat) => {
-	chat.say("Welcome on our chat, you can send the command "register <username> <pin code>" to link your account with your card.  Afterwards you can use the command "stats" to have your games statistics.");
+	chat.say("Welcome on our chat, you can send the command \"register <username> <pin code>\" to link your account with your card.  Afterwards you can use the command \"stats\" to have your games statistics.");
 })
 
 bot.on('postback:GET_STATS', (payload, chat) => {
@@ -163,7 +163,7 @@ bot.on('postback:GET_STATS', (payload, chat) => {
 // bot.module(registerscorealias);
 //
 function getStarted(userId) {
-    bot.say(userId, "Welcome on our chat, you can send the command "register <username> <pin code>" to link your account with your card.");
+    bot.say(userId, "Welcome on our chat, you can send the command \"register <username> <pin code>\" to link your account with your card.");
     // bot.say("Hi! I'm Enry, a facebook bot for table tennis. Please pick an Option", replies);
 }
 
