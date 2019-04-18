@@ -137,7 +137,6 @@ bot.on('postback:GET_HELP', (payload, chat) => {
 
 bot.on('postback:GET_STATS', (payload, chat) => {
 	chat.getUserProfile().then((user) => {
-		var text = payload.message.text;
 		var userId = payload.sender.id;
 		chat.say('Before searching database');
 		db.getStats(userId, function(res){
