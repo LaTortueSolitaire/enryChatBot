@@ -61,13 +61,7 @@ app.use(function (err, req, res, next) {
 
 bot.setGetStartedButton(getStarted);
 
-bot.setGreetingText("Welcome to Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n Register CoolUser 1234 \n Enry.Chat can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
-
-bot.hear(['hello', 'hi', /hey( there)?/i], (payload, chat) => {
-	chat.getUserProfile().then((user) => {
-		chat.say(`Hi there !`);
-	});
-});
+bot.setGreetingText("Welcome to Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n\n Register CoolUser 1234 \n\n Enry.Chat can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
 
 bot.hear(['hello', 'hi', /hey( there)?/i], (payload, chat) => {
 	chat.getUserProfile().then((user) => {
@@ -103,7 +97,7 @@ bot.hear(/stats/gi, (payload, chat) => {
 				var nbGames = res.games;
 				var nbWins = res.wins;
 				var percents = Math.round((nbWins/nbGames)*100);
-				chat.say("Your statistics are : \n - "+nbWins.toString()+" wins over "+nbGames.toString()+" games. \n - "+percents.toString()+" % of wins.");
+				chat.say("Your statistics are : \n\n - "+nbWins.toString()+" wins over "+nbGames.toString()+" games. \n\n - "+percents.toString()+" % of wins.");
 			}
 		});
 	})
@@ -140,7 +134,7 @@ bot.setPersistentMenu([
 
 
 bot.on('postback:GET_HELP', (payload, chat) => {
-	chat.say("Let me help you: I am Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n CoolUser 1234 \nI can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
+	chat.say("Let me help you: I am Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n\n CoolUser 1234 \n\nI can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
 })
 
 bot.on('postback:GET_STATS', (payload, chat) => {
@@ -154,7 +148,7 @@ bot.on('postback:GET_STATS', (payload, chat) => {
 				var nbGames = res.games;
 				var nbWins = res.wins;
 				var percents = Math.round((nbWins/nbGames)*100);
-				chat.say("Your statistics are : \n - "+nbWins.toString()+" wins over "+nbGames.toString()+" games. \n - "+percents.toString()+" % of wins.");
+				chat.say("Your statistics are : \n\n - "+nbWins.toString()+" wins over "+nbGames.toString()+" games. \n\n - "+percents.toString()+" % of wins.");
 			}
 		});
 	})
