@@ -104,13 +104,12 @@ bot.hear(/stats/gi, (payload, chat) => {
 });
 
 bot.on('message', (payload, chat, data) => {
-	   chat.getUserProfile().then((user) => {
-		   if(!data.captured){
-		       chat.say(`Hello, ${user.first_name}!`);
-		       chat.say(`I am a simple mind and your message was too complicated for me 😥. Please try one of the menu buttons 👍.`);
-		   }
-	   });
-	}
+   chat.getUserProfile().then((user) => {
+	   if(!data.captured){
+	       chat.say(`Hello, ${user.first_name}!`);
+	       chat.say(`I am a simple mind and your message was too complicated for me 😥. Please try one of the menu buttons 👍.`);
+	   }
+   });
 });
 
 
