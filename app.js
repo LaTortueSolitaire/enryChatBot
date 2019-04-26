@@ -59,9 +59,13 @@ app.use(function (err, req, res, next) {
     res.render('error');
 });
 
-bot.setGetStartedButton(getStarted);
+bot.setGetStartedButton({
+  "get_started":{
+    "payload":"GET_STARTED"
+  }
+});
 
-bot.setGreetingText("Welcome to Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n\n Register CoolUser 1234 \n\n Enry.Chat can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
+bot.setGreetingText("Welcome to Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n\nRegister CoolUser 1234 \n\n Enry.Chat can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
 
 bot.hear(['hello', 'hi', /hey( there)?/i], (payload, chat) => {
 	chat.getUserProfile().then((user) => {
@@ -106,7 +110,6 @@ bot.hear(/stats/gi, (payload, chat) => {
 bot.on('message', (payload, chat, data) => {
    chat.getUserProfile().then((user) => {
 	   if(!data.captured){
-	       chat.say(`Hello, ${user.first_name}!`);
 	       chat.say(`I am a simple mind and your message was too complicated for me 😥. Please try one of the menu buttons 👍.`);
 	   }
    });
@@ -134,7 +137,7 @@ bot.setPersistentMenu([
 
 
 bot.on('postback:GET_HELP', (payload, chat) => {
-	chat.say("Let me help you: I am Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n\n CoolUser 1234 \n\nI can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
+	chat.say("Let me help you: I am Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n\nRegister CoolUser 1234 \n\nI can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
 })
 
 bot.on('postback:GET_STATS', (payload, chat) => {
@@ -154,12 +157,14 @@ bot.on('postback:GET_STATS', (payload, chat) => {
 	})
 })
 
+bot.on('postback:GET_STARTED', (payload, chat) => {
+	chat.getUserProfile().then((user) => {
+		chat.say("Welcome to Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n\nRegister CoolUser 1234 \n\n Enry.Chat can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
+	})
+})
+
 // bot.module(registerscorephone);
 // bot.module(registerscorealias);
-//
-function getStarted(userId) {
-    bot.say(userId, "Welcome to Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n Register CoolUser 1234 \n Enry.Chat can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
-}
 
 // function report_score(userId) {
 //     bot.sendTextMessage(userId, "Please provide me with the score in the following format: (Your score) (Opponents score) (Opponents name) example: 10 9 Sebastian");
