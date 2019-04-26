@@ -59,11 +59,7 @@ app.use(function (err, req, res, next) {
     res.render('error');
 });
 
-bot.setGetStartedButton({
-  "get_started":{
-    "payload":"GET_STARTED"
-  }
-});
+bot.setGetStartedButton("Welcome to Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n\nRegister CoolUser 1234 \n\n Enry.Chat can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
 
 bot.setGreetingText("Welcome to Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n\nRegister CoolUser 1234 \n\n Enry.Chat can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
 
@@ -83,7 +79,7 @@ bot.hear(/register \w+ \d{4}/gi, (payload, chat) => {
 				chat.say('Your username '+mess[1]+' has now been correctly linked to your card. Try another match!');
 			}
 			else {
-				chat.say('There was no player with this pin code');
+				chat.say('Oh, no 😱! Something went wrong. My circuits are overheating. I think that was a wrong PIN code… 🤯\n\nWould you please check the PIN code with the Enry:Box 🤗?');
 			}
 		});
 	})
