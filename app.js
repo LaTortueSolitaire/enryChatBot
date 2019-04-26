@@ -59,7 +59,7 @@ app.use(function (err, req, res, next) {
     res.render('error');
 });
 
-bot.setGetStartedButton("Welcome to Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n\nRegister CoolUser 1234 \n\n Enry.Chat can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
+bot.setGetStartedButton("GET_STARTED");
 
 bot.setGreetingText("Welcome to Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n\nRegister CoolUser 1234 \n\n Enry.Chat can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
 
