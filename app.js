@@ -63,24 +63,19 @@ bot.setGetStartedButton(getStarted);
 
 bot.setGreetingText("Welcome to Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n Register CoolUser 1234 \n Enry.Chat can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
 
-var checkRecognizedMessage = false;
-
 bot.hear(['hello', 'hi', /hey( there)?/i], (payload, chat) => {
-	checkRecognizedMessage = true;
 	chat.getUserProfile().then((user) => {
 		chat.say(`Hi there !`);
 	});
 });
 
 bot.hear(['hello', 'hi', /hey( there)?/i], (payload, chat) => {
-	checkRecognizedMessage = true;
 	chat.getUserProfile().then((user) => {
 		chat.say(`Hi there !`);
 	});
 });
 
 bot.hear(/register \w+ \d{4}/gi, (payload, chat) => {
-	checkRecognizedMessage = true;
 	chat.getUserProfile().then((user) =>{
 		var text = payload.message.text;
 		var userId = payload.sender.id;
@@ -97,7 +92,6 @@ bot.hear(/register \w+ \d{4}/gi, (payload, chat) => {
 });
 
 bot.hear(/stats/gi, (payload, chat) => {
-	checkRecognizedMessage = true;
 	chat.getUserProfile().then((user) => {
 		var text = payload.message.text;
 		var userId = payload.sender.id;
@@ -115,17 +109,15 @@ bot.hear(/stats/gi, (payload, chat) => {
 	})
 });
 
-if(checkRecognizedMessage==false){
-	bot.on('message', (payload, chat) => {
+bot.on('message', (payload, chat, data) => {
+	if(!data.captured){
 	   chat.getUserProfile().then((user) => {
 	       chat.say(`Hello, ${user.first_name}!`);
 	       chat.say(`I am a simple mind and your message was too complicated for me 😥. Please try one of the menu buttons 👍.`);
 	   });
-	});
-}
-else{
-	checkRecognizedMessage=false;
-}
+	}
+});
+
 
 bot.setPersistentMenu([
 	{
