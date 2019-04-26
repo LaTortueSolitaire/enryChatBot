@@ -63,62 +63,69 @@ bot.setGetStartedButton(getStarted);
 
 bot.setGreetingText("Welcome to Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n Register CoolUser 1234 \n Enry.Chat can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
 
+var checkRecognizedMessage = false;
 
-
-
-bot.on('message', (payload, chat) => {
-	var checkRecognizedMessage = false;
-
-	bot.hear(['hello', 'hi', /hey( there)?/i], (payload, chat) => {
-		checkRecognizedMessage = true;
-	    chat.getUserProfile().then((user) => {
-	        chat.say(`Hi there !`);
-	    });
+bot.hear(['hello', 'hi', /hey( there)?/i], (payload, chat) => {
+	checkRecognizedMessage = true;
+	chat.getUserProfile().then((user) => {
+		chat.say(`Hi there !`);
 	});
+});
 
-	bot.hear(/register \w+ \d{4}/gi, (payload, chat) => {
-		checkRecognizedMessage = true;
-		chat.getUserProfile().then((user) =>{
-			var text = payload.message.text;
-			var userId = payload.sender.id;
-			var mess = text.split(' ');
-			db.registerUsername(mess[1], parseInt(mess[2]), userId, function(res){
-				if(res == 1) {
-					chat.say('Your username '+mess[1]+' has now been correctly linked to your card. Try another match!');
-				}
-				else {
-					chat.say('There was no player with this pin code');
-				}
-			});
-		})
+bot.hear(['hello', 'hi', /hey( there)?/i], (payload, chat) => {
+	checkRecognizedMessage = true;
+	chat.getUserProfile().then((user) => {
+		chat.say(`Hi there !`);
 	});
+});
 
-	bot.hear(/stats/gi, (payload, chat) => {
-		checkRecognizedMessage = true;
-		chat.getUserProfile().then((user) => {
-			var text = payload.message.text;
-			var userId = payload.sender.id;
-			db.getStats(userId, function(res){
-				if(!res){
-					chat.say('Make sure to register your username with Enry.Chat before your ask for your statistics. Thanks!');
-				}
-				else {
-					var nbGames = res.games;
-					var nbWins = res.wins;
-					var percents = Math.round((nbWins/nbGames)*100);
-					chat.say("Your statistics are : \n - "+nbWins.toString()+" wins over "+nbGames.toString()+" games. \n - "+percents.toString()+" % of wins.");
-				}
-			});
-		})
-	});
+bot.hear(/register \w+ \d{4}/gi, (payload, chat) => {
+	checkRecognizedMessage = true;
+	chat.getUserProfile().then((user) =>{
+		var text = payload.message.text;
+		var userId = payload.sender.id;
+		var mess = text.split(' ');
+		db.registerUsername(mess[1], parseInt(mess[2]), userId, function(res){
+			if(res == 1) {
+				chat.say('Your username '+mess[1]+' has now been correctly linked to your card. Try another match!');
+			}
+			else {
+				chat.say('There was no player with this pin code');
+			}
+		});
+	})
+});
 
-	if(checkRecognizedMessage==false){
+bot.hear(/stats/gi, (payload, chat) => {
+	checkRecognizedMessage = true;
+	chat.getUserProfile().then((user) => {
+		var text = payload.message.text;
+		var userId = payload.sender.id;
+		db.getStats(userId, function(res){
+			if(!res){
+				chat.say('Make sure to register your username with Enry.Chat before your ask for your statistics. Thanks!');
+			}
+			else {
+				var nbGames = res.games;
+				var nbWins = res.wins;
+				var percents = Math.round((nbWins/nbGames)*100);
+				chat.say("Your statistics are : \n - "+nbWins.toString()+" wins over "+nbGames.toString()+" games. \n - "+percents.toString()+" % of wins.");
+			}
+		});
+	})
+});
+
+if(checkRecognizedMessage==false){
+	bot.on('message', (payload, chat) => {
 	   chat.getUserProfile().then((user) => {
 	       chat.say(`Hello, ${user.first_name}!`);
 	       chat.say(`I am a simple mind and your message was too complicated for me 😥. Please try one of the menu buttons 👍.`);
 	   });
-	}
-});
+	});
+}
+else{
+	checkRecognizedMessage=false;
+}
 
 bot.setPersistentMenu([
 	{
