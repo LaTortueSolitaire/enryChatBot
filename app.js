@@ -61,7 +61,7 @@ app.use(function (err, req, res, next) {
 
 bot.setGetStartedButton("GET_STARTED");
 
-bot.setGreetingText("Welcome to Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n\nRegister CoolUser 1234 \n\n Enry.Chat can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
+bot.setGreetingText("Welcome to Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n\nRegister CoolUser 1234 \n\nEnry.Chat can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
 
 bot.hear(['hello', 'hi', /hey( there)?/i], (payload, chat) => {
 	chat.getUserProfile().then((user) => {
@@ -155,7 +155,7 @@ bot.on('postback:GET_STATS', (payload, chat) => {
 
 bot.on('postback:GET_STARTED', (payload, chat) => {
 	chat.getUserProfile().then((user) => {
-		chat.say("Welcome to Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n\nRegister CoolUser 1234 \n\n Enry.Chat can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
+		chat.say("Welcome to Enry.Chat - your Table Tennis Chatbot 🤖! Choose a username followed by the PIN code provided by Enry:Box. Example: \n\nRegister CoolUser 1234 \n\nEnry.Chat can then link your card swipes and games to create your very own table tennis statistics. Write <stats> or click the menu button to retrieve your stats 📠.");
 	})
 })
 
